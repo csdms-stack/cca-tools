@@ -1,0 +1,22 @@
+{% set name = "cca-tools" %}
+{% set version = "0.1" %}
+
+package:
+  name: {{ name }}
+  version: {{ version }}
+
+build:
+  entry_points: []
+  number: 0
+  string: '0'
+
+requirements:
+  run:
+    - cca-spec-babel
+    - cca-bocca
+    - ccaffeine
+    - cca-babel <2
+
+extra:
+  copy_test_source_files: true
+  final: true
