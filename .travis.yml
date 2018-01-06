@@ -7,6 +7,7 @@ env:
   - CONDA_PREFIX=$HOME/miniconda
   - MINICONDA_URL_BASE="https://repo.continuum.io/miniconda/Miniconda3-latest"
   - TRAVIS_PYTHON_VERSION="2.7"
+  - secure: "JtqZHcqzBd7FWh7fUzqh7wStJmPId41OnUp32d7tru+6sYqrLAKxKcr0ftRwVDEKCpCl7KwRtdhwZwGJKtDCnu/oFuOdv9QPgkLLt7X81vbKj5mZih+7633+40ik9QXkAcXnj9bf+57V4pDEMBwNTXVCj6Q6DLESvj+hzm4+fWJXl26q6d3ktJYjxSeVY3EzShkj2RCYkz49Fn93jMBc6fh1TmmTyODRplh9pygNgzCJl6v92YspSlVuDr6cFJ7SLrb54aR0MtahvFNI6TQsf0U/tHQDaD4J0nBqLpgIR/rQiEyX130j0iWUIgSUzZ6FvvuKnNiocAnEn8Iw5mLrnBpHe6RiV0kU3YfGgrCE4i6wXQj3w1WmcMvq5VkacAn0jG/pzIWrk5U6fzLLkY6uQisAxZMaIAOeVh2hM3LuXXnM7i7UKMb9U4lLzN23kHr1dE6FsGIYwrOIf2OXEsqVMGRN7e3K9B/5Q+6yN6ANglvbWFiUIADUk8sfsWlEGhi6gGh36RUXj5kOFJ1tem3ftHQxTEQcuhwu7CPeWoXcFzlZAorZS1hOdKOU9xP+pXEvLHZ4zExxq0XiU1Kbznsmz6ITJnL2sye+K0oFtVmMbImI4AaCuNcJ7cZ8jCzkzll1guNWjfQ1pSyM6Osu+x5SRqi1rbYSuZBnlg8TKOx0hYI="
 sudo: false
 before_install:
 - |
@@ -32,8 +33,7 @@ install:
 script:
 - conda build ./recipe -c csdms-stack -c conda-forge --old-build-string
 after_success:
-- curl https://raw.githubusercontent.com/csdms/ci-tools/master/anaconda_upload.py
-  > $HOME/anaconda_upload.py
+- curl https://raw.githubusercontent.com/csdms/ci-tools/master/anaconda_upload.py > $HOME/anaconda_upload.py
 - |
   if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
     echo $ANACONDA_TOKEN | python $HOME/anaconda_upload.py ./recipe --channel=main --org=csdms-stack --old-build-string --token=-
